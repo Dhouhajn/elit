@@ -1,7 +1,17 @@
-import 'package:elit/splash.dart';
+import 'package:elit/Authentication.dart';
+import 'package:elit/screens/chat.dart';
+import 'package:elit/screens/login_screen.dart';
+import 'package:elit/screens/sign_up_screen.dart';
+import 'package:elit/screens/splash.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-void main() {
+
+import 'firebase_options.dart';
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -12,15 +22,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Chat app',
       theme: ThemeData(
-       
-        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        // useMaterial3: true,
-      ),
-      home: Splash(),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          // useMaterial3: true,
+          ),
+      // home: const Splash(),
+       routes: {
+        '/':(context) => const Splash(),
+        'Signup':(context) => const Signup(),
+        'Login':(context) => const Login(),
+        'Chat':(context) => const Chat(),
+
+  },
+
     );
   }
 }
-
-
